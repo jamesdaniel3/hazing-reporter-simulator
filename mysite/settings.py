@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_DJANGO_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['local host', 'localhost', '127.0.0.1', 'testserver']
+ALLOWED_HOSTS = ['127.0.0.1', 'testserver', 'hazing-reporter-simulator-4777047cf362.herokuapp.com']
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SECURE_REFERRER_POLICY = None
 
