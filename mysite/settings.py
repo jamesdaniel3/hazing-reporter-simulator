@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_DJANGO_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['local host', 'localhost', 'cs3240-project-b-24-d49c3591adbc.herokuapp.com', '127.0.0.1', 'testserver']
+ALLOWED_HOSTS = ['local host', 'localhost', '127.0.0.1', 'testserver']
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SECURE_REFERRER_POLICY = None
 
@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
+if 'DATABASE_URI' in os.environ:
     DATABASES = {
         "default": dj_database_url.config(
             conn_max_age=600,
@@ -130,7 +130,7 @@ if "test" in sys.argv:
 # S3 Database Info
 # AWS Access Key and Secret Access Key stored in Heroku as config vars
 
-AWS_STORAGE_BUCKET_NAME = 'cs3240-project-b-24-reports'
+AWS_STORAGE_BUCKET_NAME = 'hazing-report-sim'
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
