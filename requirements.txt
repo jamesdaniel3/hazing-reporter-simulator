@@ -1,0 +1,8 @@
+Django
+django-heroku
+django-allauth==0.61.1
+django-storages
+boto3
+gunicorn
+dj-database-url
+python-dotenv

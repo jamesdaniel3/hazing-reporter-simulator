@@ -1,0 +1,103 @@
+<!-- HOME PAGE -->
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UVA Hazing Whistle Blower</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'whistleblower/style.css' %}">
+</head>
+
+<body>
+  {% load socialaccount %}
+
+   <header class="header">
+        <div class="title">UVA Hazing Whistle Blower</div>
+        <div class="buttons">
+            <button class="button" onclick="makeReport()">Make a Report</button>
+            {% if user.is_authenticated %}
+                <button class="button" onclick="myReports()">My Reports</button>
+                <form id="logout-form" action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="button">Logout</button>
+                </form>
+            {% else %}
+                <form id="google-login-form" action="{% provider_login_url 'google' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="button" onclick="signInWithGoogle()">Sign in with Google</button>
+                </form>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="content">
+
+        <div class="title">Hazing</div>
+        <p>Hazing is a crime in the Commonwealth of Virginia and is prohibited in accordance with University of Virginia's
+        policy and the University’s Standards of Conduct. The University does not condone hazing in any form. Hazing is defined
+        as any action or situation created by one or more members, advisors, or coaches of a student organization
+        (including athletic teams) toward other organization members or prospective members that intentionally or
+        recklessly threatens or produces mental or physical harassment, humiliation, fatigue, degradation, ridicule,
+        shock, or injury. The action or situation is in connection with initiation, admission, affiliation, or ongoing
+        membership in the organization, may occur with or without the consent of the participants, and may occur on
+        or off University Property.</p>
+
+        <div class="title">Reporting an Incident</div>
+        <p>To report a hazing incident, simply click on the Make a Report button at top of the page, and you will be redirected
+        to a form where you will be asked to fill out the necessary information. If you would like
+        to report the hazing anonymously, feel free to fill out the report without using the sign in feature on the website. Otherwise,
+        please use the Sign in button before making your report. Users who report anonymously will not
+        receive updates on the status of their report, while those who sign in will. </p>
+
+        <div class="title">The Process</div>
+        <p>To create a report, simply click on the Make a Report button, fill out the form, and click Submit. If you do not sign in
+        before making the report, the submission will be anonymous. If you sign in, a button will appear next to the Make
+        a Report button called My Reports. This will take you to a page where you can see the status of your report and get
+        notes about the outcome of the report. After submitting a report, an admin will review your report and provide feedback
+        about any action that is taken. </p>
+
+        <div class="title">More Resources</div>
+        <p>Whether or not you make a report, you may discuss an incident confidentially with any of the following Confidential
+        Resources.</p>
+        <ul>
+            <li>
+                Student Health <a href="https://www.studenthealth.virginia.edu/CAPS">Counseling & Psychological Services</a>,
+                434-243-5150
+            </li>
+            <li>
+                Student Health <a href="https://www.studenthealth.virginia.edu/medical-services">General Medicine</a>, 434-982-3915
+            </li>
+        </ul>
+
+        <p>If you would like to speak to a faculty member in person, please reach out to the Office of the Dean of Students.
+        It is located on the second floor of Peabody Hall and can be reached at 434-924-7133 or odos@virginia.edu</p>
+
+    </div>
+
+  <footer class="footer">
+      <div class="disclaimer">
+          <p style="color:red;"><strong>Disclaimer:</strong> this website is a project for UVA CS 3240. As there is no one
+          monitoring this project, reports made to it will have no effect. Additionally, no real information should be submitted
+          to this webpage. If you are a UVA Student and want to report a hazing incident, please go
+          <a href="https://justreportit.virginia.edu/">here</a> to do so. </p>
+      </div>
+  </footer>
+
+    <script>
+        function makeReport() {
+            window.location.href = "make_report";
+        }
+
+        function signInWithGoogle() {
+            document.getElementById('google-login-form').submit();
+        }
+
+        function myReports() {
+            window.location.href = "my_reports";
+        }
+    </script>
+</body>

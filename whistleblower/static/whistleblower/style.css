@@ -1,0 +1,117 @@
+.header {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #00214d;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.footer {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-top: 1px solid #00214d;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.title {
+    color: #00214d;
+    font-size: 24px;
+    font-weight: bold;
+}
+.buttons {
+    display: flex;
+    align-items: center;
+}
+.button {
+    background-color: #00214d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #007bff;
+}
+
+.content {
+    padding-top: 80px;
+    padding-bottom: 100px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.form-control-file {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    margin-bottom: 0.5rem;
+}
+
+#reportFile {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+#description {
+    resize: none; /* Prevents resizing, remove if you want users to resize */
+}
+
+.submit-btn {
+    background-color: #00214d;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.submit-btn:hover {
+    background-color: #007bff;
+}
+
+#date, #time {
+    max-width: 200px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    color: red;
+    padding: 10px 0;
+}
+
+
+body {
+    padding-bottom: 60px;
+}
+
+.disclaimer{
+    width: 90%;
+    margin-left: 5%;
+}
