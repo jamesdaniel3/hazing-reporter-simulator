@@ -17,4 +17,4 @@ urlpatterns = [
     path("delete_report/<int:report_id>", views.delete_report, name="delete_report"),
     path("resolve_report/<int:report_id>", views.resolve_report, name="resolve_report"),
     path("reopen_report/<int:report_id>", views.reopen_report, name="reopen_report"),
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
