@@ -1,5 +1,5 @@
-Django
-django-heroku
+Django==5.0.4
+django-on-heroku
 django-allauth==0.61.1
 django-storages
 boto3
