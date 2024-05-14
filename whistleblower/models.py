@@ -1,10 +1,8 @@
 from django.contrib.auth.models import AbstractUser, Permission, Group
 from django.db import models
-from django.http import HttpResponse
 
 
 class CustomUser(AbstractUser):
-    # Add any additional fields here
     is_site_admin = models.BooleanField(default=False)
 
     class Meta:
@@ -35,6 +33,7 @@ class CustomUser(AbstractUser):
         help_text='groups for this user',
     )
 
+
 class Report(models.Model):
     user_name = models.TextField(null=True)
     user_email = models.TextField(null=True)
@@ -44,8 +43,7 @@ class Report(models.Model):
     time = models.TimeField(default="NOT PROVIDED")
     status = models.CharField(max_length=1, default='n')
     admin_notes = models.TextField(null=True)
-    #def __str__(self):
-    #    return self.report_file.name
+
 
 class ReportFile(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)

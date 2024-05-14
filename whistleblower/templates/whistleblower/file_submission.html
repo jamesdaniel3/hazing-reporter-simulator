@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
-{% load socialaccount %}
 <head>
     <meta charset="UTF-8">
     <title>Make a Report</title>
-    <!-- Note: Order matter here!! -->
+    <!-- Note: Order matters here!! -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'whistleblower/style.css' %}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="{% static 'whistleblower/functionality/file_submission.js' %}"></script>
 </head>
 <body>
     <input type="hidden" id="isLoggedIn" value="{% if user.is_authenticated %}true{% else %}false{% endif %}">
@@ -46,127 +46,7 @@
             <button type="submit" class="submit-btn">Upload</button>
         </form>
     </div>
-
-  <footer class="footer">
-      <div class="disclaimer">
-          <p style="color:red;"><strong>Disclaimer:</strong> this website is a project for UVA CS 3240. As there is no one
-          monitoring this project, reports made to it will have no effect. Additionally, no real information should be submitted
-          to this webpage. If you are a UVA Student and want to report a hazing incident, please go
-          <a href="https://justreportit.virginia.edu/">here</a> to do so. </p>
-      </div>
-  </footer>
-
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Log In Recommended</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>If you submit a report without logging in, you will be anonymous, but you will not have access to any report information. If you want to be able to access
-                        this report again, please log in.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="continue-btn">Submit Anonymously</button>
-                    <form id="google-login-form" action="{% provider_login_url 'google' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary">Sign in with Google</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'whistleblower/modals/login_warning.html' %}
+    {% include 'whistleblower/footer.html' %}
 
 </body>
-
-<script>
-    function goBack() {
-        window.location.href = "submitted_report";
-    }
-
-    /* Set max time constraint based on selected date */
-    function updateTimeConstraint() {
-        var selectedDate = document.getElementById('date').value;
-        var today = new Date();
-
-        // Format today's date to YYYY-MM-DD using local values
-        var formattedToday = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-
-        // Format current local time to HH:MM
-        var localTime = ('0' + today.getHours()).slice(-2) + ':' + ('0' + today.getMinutes()).slice(-2);
-
-        // If selected date is today, set max time to current local time
-        if (selectedDate === formattedToday) {
-            document.getElementById('time').max = localTime;
-        } else {
-            // If selected date is not today, remove max time constraint
-            document.getElementById('time').removeAttribute('max');
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var today = new Date();
-        var pastDate = new Date();
-        pastDate.setFullYear(today.getFullYear() - 10); // Set to 10 years in the past
-
-        // Format today's date to YYYY-MM-DD without converting to UTC
-        var formattedToday = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-        var formattedPastDate = pastDate.getFullYear() + '-' + ('0' + (pastDate.getMonth() + 1)).slice(-2) + '-' + ('0' + pastDate.getDate()).slice(-2);
-
-        // Set max and min attributes for date input
-        document.getElementById('date').max = formattedToday;
-        document.getElementById('date').min = formattedPastDate;
-
-        // Add event listener to date input to update time constraint
-        document.getElementById('date').addEventListener('change', updateTimeConstraint);
-
-        // Initialize time constraint based on current date
-        updateTimeConstraint();
-    });
-
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var textarea = document.getElementById('description');
-        var charCount = document.getElementById('charCount');
-
-        textarea.addEventListener('input', function () {
-            var count = textarea.value.length;
-            charCount.textContent = count + '/2500';
-        });
-    });
-
-    $(document).ready(function() {
-        $('#reportForm').submit(function(e) {
-            var form = $(this);
-            if (form[0].checkValidity() === false) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        });
-
-        $('.submit-btn').click(function(e) {
-            var form = $('#reportForm')[0]; // Get the form element
-            if (!form.checkValidity()) {
-                return; // If the form is not valid, do nothing
-            }
-            e.preventDefault(); // Prevent the form from submitting immediately
-
-            var isLoggedIn = $('#isLoggedIn').val();
-            if (isLoggedIn === 'false') {
-                $('#loginModal').modal('show'); // Show the modal if not logged in
-            } else {
-                form.submit(); // Submit the form if logged in
-            }
-        });
-
-        $('#continue-btn').click(function() {
-            $('#reportForm').submit(); // Submit the form when continuing anonymously
-        });
-    });
-
-</script>
-
-<!-- link to file submission info: https://www.freecodecamp.org/news/upload-files-with-html/#:~:text=On%20its%20own%2C%20a%20file,button%3E%20to%20submit%20the%20form. -->

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+{% load socialaccount %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
@@ -10,11 +11,10 @@
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'whistleblower/style.css' %}">
+    <script src="{% static 'whistleblower/functionality/home.js' %}"></script>
 </head>
 
 <body>
-  {% load socialaccount %}
-
    <header class="header">
         <div class="title">UVA Hazing Whistle Blower</div>
         <div class="buttons">
@@ -65,11 +65,11 @@
         Resources.</p>
         <ul>
             <li>
-                Student Health <a href="https://www.studenthealth.virginia.edu/CAPS">Counseling & Psychological Services</a>,
+                Student Health <a href="https://www.studenthealth.virginia.edu/CAPS" target="_blank">Counseling & Psychological Services</a>,
                 434-243-5150
             </li>
             <li>
-                Student Health <a href="https://www.studenthealth.virginia.edu/medical-services">General Medicine</a>, 434-982-3915
+                Student Health <a href="https://www.studenthealth.virginia.edu/medical-services" target="_blank">General Medicine</a>, 434-982-3915
             </li>
         </ul>
 
@@ -77,27 +77,5 @@
         It is located on the second floor of Peabody Hall and can be reached at 434-924-7133 or odos@virginia.edu</p>
 
     </div>
-
-  <footer class="footer">
-      <div class="disclaimer">
-          <p style="color:red;"><strong>Disclaimer:</strong> this website is a project for UVA CS 3240. As there is no one
-          monitoring this project, reports made to it will have no effect. Additionally, no real information should be submitted
-          to this webpage. If you are a UVA Student and want to report a hazing incident, please go
-          <a href="https://justreportit.virginia.edu/">here</a> to do so. </p>
-      </div>
-  </footer>
-
-    <script>
-        function makeReport() {
-            window.location.href = "make_report";
-        }
-
-        function signInWithGoogle() {
-            document.getElementById('google-login-form').submit();
-        }
-
-        function myReports() {
-            window.location.href = "my_reports";
-        }
-    </script>
+    {% include 'whistleblower/footer.html' %}
 </body>
