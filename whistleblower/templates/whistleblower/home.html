@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'whistleblower/style.css' %}">
+    <script src="{% static 'whistleblower/functionality.js' %}"></script>
 </head>
 
 <body>
@@ -77,18 +78,4 @@
 
     </div>
     {% include 'whistleblower/footer.html' %}
-
-    <script>
-        function makeReport() {
-            window.location.href = "make_report";
-        }
-
-        function signInWithGoogle() {
-            document.getElementById('google-login-form').submit();
-        }
-
-        function myReports() {
-            window.location.href = "my_reports";
-        }
-    </script>
 </body>
